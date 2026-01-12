@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    // This enforces that all modules use the repositories defined here
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral() // Essential for Lombok and Spring Boot
+    }
+}
+rootProject.name = 'spring-batch-poc'

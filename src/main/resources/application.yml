@@ -1,0 +1,31 @@
+spring:
+  # Exclude JDBC DataSource autoconfiguration - we're using MongoDB exclusively
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+  # MongoDB configuration for Spring Batch metadata and business data
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb+srv://jaknap:HeB2Vad9TW2czRe1@clusterpk.nwora.mongodb.net/?appName=Clusterpk&retryWrites=true&w=majority}
+      database: ${MONGO_DB:springbatchsb}
+
+  batch:
+    job:
+      enabled: false  # Disable auto-start, we'll launch jobs programmatically
+    jdbc:
+      initialize-schema: never  # Not using JDBC for batch metadata
+
+logging:
+  level:
+    org.springframework.batch: DEBUG
+    com.example.batchmongo: DEBUG
+    org.springframework.data.mongodb: DEBUG
+
+# Batch processing configuration
+batch:
+  input:
+    file: ${INPUT_FILE:input.csv}
+  output:
+    file: ${OUTPUT_FILE:output.csv}
+  chunk:
+    size: ${CHUNK_SIZE:10}
